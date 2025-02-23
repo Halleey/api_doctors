@@ -13,7 +13,7 @@ public class Doctors {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private String nome;
+    private String name;
     private String crm;
     private String password;
     private String expertise;
@@ -26,12 +26,12 @@ public class Doctors {
         this.expertise = expertise;
     }
 
-    public String getNome() {
-        return nome;
+    public String getName() {
+        return name;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCrm() {
