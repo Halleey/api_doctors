@@ -29,7 +29,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctors.setPassword(requestDTO.getPassword());
         doctors.setExpertise(requestDTO.getExpertise());
         Doctors objectDoctors = repository.save(doctors);
-        kafkaTemplate.send("doctors", requestDTO);
+        kafkaTemplate.send("Hospital",  1, "doctorsKey", requestDTO );
         return new DoctorResponseDTO(objectDoctors.getName(),objectDoctors.getCrm(), objectDoctors.getExpertise());
     }
 
@@ -37,6 +37,4 @@ public class DoctorServiceImpl implements DoctorService {
     public Optional<Doctors> getDoctorInfo(String name, String password) {
         return repository.findByNameAndPassword(name, password);
     }
-
-
 }
