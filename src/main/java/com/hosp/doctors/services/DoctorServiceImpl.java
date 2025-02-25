@@ -8,6 +8,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.Optional;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
@@ -31,4 +32,11 @@ public class DoctorServiceImpl implements DoctorService {
         kafkaTemplate.send("doctors", requestDTO);
         return new DoctorResponseDTO(objectDoctors.getName(),objectDoctors.getCrm(), objectDoctors.getExpertise());
     }
+
+    @Override
+    public Optional<Doctors> getDoctorInfo(String name, String password) {
+        return repository.findByNameAndPassword(name, password);
+    }
+
+
 }
