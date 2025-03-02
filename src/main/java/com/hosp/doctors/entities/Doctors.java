@@ -1,9 +1,6 @@
 package com.hosp.doctors.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.UUID;
 
@@ -17,6 +14,16 @@ public class Doctors {
     private String crm;
     private String password;
     private String expertise;
+    @Enumerated(EnumType.STRING)
+    private com.hosp.doctors.entities.Role role = Role.ROLE_DOCTOR;
+
+    public Role role() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
 
     public String getExpertise() {
         return expertise;

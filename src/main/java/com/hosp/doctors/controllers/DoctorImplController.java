@@ -1,5 +1,6 @@
 package com.hosp.doctors.controllers;
 
+import com.hosp.doctors.dtos.DoctorLoginDTO;
 import com.hosp.doctors.dtos.DoctorRequestDTO;
 import com.hosp.doctors.dtos.DoctorResponseDTO;
 import com.hosp.doctors.entities.Doctors;
@@ -28,10 +29,11 @@ public class DoctorImplController implements DoctorController {
     }
 
     @Override
-    public ResponseEntity<DoctorResponseDTO> getDoctor(String name, String password) {
+    public ResponseEntity<DoctorLoginDTO> getDoctor(String name, String password) {
         Optional<Doctors> doctors = doctorService.getDoctorInfo(name, password);
         return doctors.map(value -> ResponseEntity.ok(
-                new DoctorResponseDTO(value.getName(), value.getCrm(), value.getExpertise())
+                new DoctorLoginDTO(value.getName(), value.getCrm(), value.getExpertise(), value.role())
         )).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).build());
-    } }
+    }
+}
 
