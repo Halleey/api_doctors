@@ -10,5 +10,5 @@ public interface DoctorService {
 
     DoctorResponseDTO saveDoctor(DoctorRequestDTO requestDTO);
 
-    Optional<Doctors> getDoctorInfo(String name, String password);
+    Optional<Doctors> getDoctorInfo(String name);
 }
