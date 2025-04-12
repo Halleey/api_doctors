@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface DoctorService {
 
-    public DoctorResponseDTO saveDoctor(DoctorRequestDTO requestDTO);
+    DoctorResponseDTO saveDoctor(DoctorRequestDTO requestDTO);
 
-    public Optional<Doctors> getDoctorInfo(String name, String password);
+    Optional<Doctors> getDoctorInfo(String name, String password);
 }
