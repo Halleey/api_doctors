@@ -16,6 +16,15 @@ public class Nurses {
     private com.hosp.doctors.entities.Role role = Role.ROLE_NURSE;
     @Enumerated(EnumType.STRING)
     private Shift shift;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getName() {
         return name;
