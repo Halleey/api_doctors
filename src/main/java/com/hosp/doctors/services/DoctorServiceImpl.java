@@ -4,7 +4,6 @@ import com.hosp.doctors.dtos.DoctorRequestDTO;
 import com.hosp.doctors.dtos.DoctorResponseDTO;
 import com.hosp.doctors.entities.Doctors;
 import com.hosp.doctors.repositories.DoctorRepository;
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
@@ -14,10 +13,8 @@ import java.util.Optional;
 public class DoctorServiceImpl implements DoctorService {
 
     private final DoctorRepository repository;
-    private final KafkaTemplate<String, Serializable> kafkaTemplate;
-    public DoctorServiceImpl(DoctorRepository repository, KafkaTemplate<String, Serializable> kafkaTemplate) {
+    public DoctorServiceImpl(DoctorRepository repository) {
         this.repository = repository;
-        this.kafkaTemplate = kafkaTemplate;
     }
 
 
@@ -29,7 +26,6 @@ public class DoctorServiceImpl implements DoctorService {
         doctors.setPassword(requestDTO.getPassword());
         doctors.setExpertise(requestDTO.getExpertise());
         Doctors objectDoctors = repository.save(doctors);
-        kafkaTemplate.send("Hospital",  1, "doctorsKey", requestDTO );
         return new DoctorResponseDTO(objectDoctors.getName(),objectDoctors.getCrm(), objectDoctors.getExpertise());
     }
 

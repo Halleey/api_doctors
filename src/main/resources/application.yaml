@@ -11,20 +11,6 @@ spring:
       idle-timeout: 30000
       max-lifetime: 60000
       connection-timeout: 30000
-
-  kafka:
-    bootstrap-servers: localhost:9092
-    consumer:
-      group-id: my-consumer-group
-      auto-offset-reset: earliest
-      enable-auto-commit: false
-    producer:
-      acks: all
-      retries: 3
-      batch-size: 16384
-      linger-ms: 1
-      buffer-memory: 33554432
-
   jpa:
     hibernate:
       ddl-auto: update
