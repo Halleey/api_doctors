@@ -1,18 +1,24 @@
-# Doctors API
+# Hospital Staff API
 
-A **Doctors API** é uma API RESTful que permite gerenciar o cadastro de médicos, suas informações básicas e outras funcionalidades de um sistema hospitalar. A API foi construída utilizando **Spring Boot** e oferece endpoints para o cadastro e consulta de médicos, além de integração com **Kafka** para envio de notificações quando um novo médico é cadastrado.
+A **Hospital Staff API** é uma API RESTful que permite gerenciar o cadastro de profissionais da saúde, como **médicos** e **enfermeiros**, centralizando suas informações básicas em um subsistema hospitalar. A API foi construída utilizando **Spring Boot** e fornece endpoints para cadastro e consulta de médicos e enfermeiros, compondo um microserviço dedicado ao gerenciamento de equipe.
 
-## Funcionalidades
+---
+
+## Funcionalidades atuais
 
 - **Cadastro de médicos**: Permite a criação de médicos com dados como nome, senha, CRM e especialização.
+- **Cadastro de enfermeiros(as)**: Permite a criação de enfermeiros(as) com dados como nome, número de registro e turno de trabalho.
 - **Consulta de médicos**: Permite buscar médicos pelo nome e senha para obter suas informações básicas.
-- **Notificação via Kafka**: Envia uma mensagem para o tópico "Hospital" sempre que um novo médico é cadastrado, para fins de integração com outros sistemas.
+
+---
 
 ## Tecnologias
 
-- **Spring Boot**: Framework para criação de aplicações Java baseadas em microserviços.
-- **Kafka**: Sistema de mensageria para a troca de dados entre diferentes partes do sistema.
-- **JPA/Hibernate**: Para persistência de dados no banco de dados MySQL.
+- **Spring Boot**: Framework para construção de microserviços em Java.
+- **JPA/Hibernate**: Persistência de dados no banco de dados MySQL.
+- **MySQL**: Banco de dados relacional para armazenamento das entidades.
+
+---
 
 ## Endpoints
 
@@ -50,7 +56,7 @@ Busca um médico pelo nome e senha.
 - `password`: Senha do médico.
 
 **Response**:
-- **Status**: `200 OK` (Caso o médico seja encontrado)
+- **Status**: `200 OK`  
 ```json
 {
   "name": "Dr. João Silva",
@@ -58,21 +64,46 @@ Busca um médico pelo nome e senha.
   "expertise": "Cardiologia"
 }
 ```
-
 - **Status**: `404 Not Found` (Caso o médico não seja encontrado)
+
+---
+
+### 3. `POST /nurses`
+Cria uma nova enfermeira ou enfermeiro.
+
+**Request Body**:
+```json
+{
+  "name": "Maria Clara",
+  "registrationNumber": "COREN-548723",
+  "shift": "NIGHT",
+  "password": "senhaSegura"
+}
+```
+
+**Response**:
+- **Status**: `201 Created`
+- **Body**:
+```json
+{
+  "name": "Maria Clara",
+  "registrationNumber": "COREN-548723",
+  "shift": "NIGHT"
+}
+```
+
+---
 
 ## Instalação
 
 ### 1. Clonando o Repositório
-
 ```bash
-git clone https://github.com/seu-usuario/doctors-api.git
-cd doctors-api
+git clone https://github.com/seu-usuario/hospital-staff-api.git
+cd hospital-staff-api
 ```
 
 ### 2. Configuração do Banco de Dados
-
-A API utiliza **MySQL** como banco de dados. Certifique-se de que o MySQL está instalado e em execução. Crie um banco de dados chamado `hospital` e ajuste as configurações no arquivo `application.yml`.
+A API utiliza **MySQL** como banco de dados. Certifique-se de que o MySQL está instalado e em execução. Crie um banco de dados chamado `hospital` e ajuste as configurações no arquivo `application.yml`:
 
 ```yaml
 spring:
@@ -82,25 +113,27 @@ spring:
     password: sua-senha
 ```
 
-### 3. Executando a API
+---
 
-Depois de configurar o banco de dados, basta rodar a aplicação com o comando:
+### 3. Executando a API
+Depois de configurar o banco de dados, execute o seguinte comando para subir a aplicação:
 
 ```bash
 mvn spring-boot:run
 ```
 
-A API estará disponível em `http://localhost:8080`.
+A API estará acessível em:  
+`http://localhost:8080`
+
+---
 
 ## Integrações Futuras
 
-### 1. Integração com Pacientes e Prontuários
+O sistema está preparado para futuras integrações, incluindo:
 
-Planejamos futuras integrações com pacientes e prontuários para expandir as funcionalidades do sistema hospitalar. A ideia é conectar os médicos aos pacientes, registrando suas especialidades e permitindo que os prontuários dos pacientes sejam atualizados diretamente pelos médicos.
+- **Criptografia de senha**.
+- **Alteração de informações**: Alterar dados a respeito dos agentes que trabalham no hospital.
+- **Sistema de notificações internas**: Alerta de alterações em dados sensíveis, turnos e novos atendimentos.
 
-Possíveis Funcionalidades Futuras:
 
-- Prontuário Eletrônico: Criar um sistema de prontuário eletrônico, onde médicos podem registrar as consultas, diagnósticos e tratamentos dos pacientes.
-- Histórico Médico: Permitir que médicos visualizem o histórico de atendimentos dos pacientes e adicionem novos registros no prontuário.
-- Notificações de Atendimento: Enviar notificações via Kafka sempre que um médico atender um paciente ou alterar o prontuário.
 
