@@ -1,4 +1,4 @@
-package com.hosp.doctors.controllers;
+package com.hosp.doctors.controllers.doctors;
 
 import com.hosp.doctors.dtos.AuthRequestDTO;
 import com.hosp.doctors.dtos.doctors.DoctorLoginDTO;

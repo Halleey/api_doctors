@@ -30,7 +30,9 @@ public class NursesServiceImpl implements NursesService {
     }
 
     @Override
-    public Optional<Nurses> getDoctorInfo(String name) {
+    public Optional<Nurses> getNurse(String name) {
         return repository.findByName(name);
     }
+
+
 }

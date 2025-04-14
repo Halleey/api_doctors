@@ -10,5 +10,5 @@ public interface NursesService {
 
     void saveNurse(NursesRequestDTO requestDTO);
 
-    Optional<Nurses> getDoctorInfo(String name);
+    Optional<Nurses> getNurse(String name);
 }
