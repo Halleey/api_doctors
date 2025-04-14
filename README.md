@@ -1,31 +1,32 @@
 # Hospital Staff API
 
-A **Hospital Staff API** é uma API RESTful que permite gerenciar o cadastro de profissionais da saúde, como **médicos** e **enfermeiros**, centralizando suas informações básicas em um subsistema hospitalar. A API foi construída utilizando **Spring Boot** e fornece endpoints para cadastro e consulta de médicos e enfermeiros, compondo um microserviço dedicado ao gerenciamento de equipe.
+A **Hospital Staff API** é uma API RESTful desenvolvida em **Spring Boot** para facilitar o gerenciamento de profissionais da saúde, como **médicos** e **enfermeiros(as)**, dentro de um subsistema hospitalar. Essa API centraliza dados de cadastro e consulta, permitindo que sistemas hospitalares consultem e administrem suas equipes com segurança e organização.
 
 ---
 
-## Funcionalidades atuais
+## 🔧 Funcionalidades Atuais
 
-- **Cadastro de médicos**: Permite a criação de médicos com dados como nome, senha, CRM e especialização.
-- **Cadastro de enfermeiros(as)**: Permite a criação de enfermeiros(as) com dados como nome, número de registro e turno de trabalho.
-- **Consulta de médicos**: Permite buscar médicos pelo nome e senha para obter suas informações básicas.
-
----
-
-## Tecnologias
-
-- **Spring Boot**: Framework para construção de microserviços em Java.
-- **JPA/Hibernate**: Persistência de dados no banco de dados MySQL.
-- **MySQL**: Banco de dados relacional para armazenamento das entidades.
+- ✅ **Cadastro de Médicos**: Cria novos registros com nome, senha, CRM e especialização.
+- ✅ **Cadastro de Enfermeiros(as)**: Cadastra enfermeiros(as) com nome, número de registro e turno de trabalho.
+- ✅ **Autenticação de Médicos e Enfermeiros(as)**: Consulta usando nome e senha via método `POST` para autenticar e obter as informações do profissional.
 
 ---
 
-## Endpoints
+## 🚀 Tecnologias Utilizadas
+
+- **Spring Boot**: Framework para desenvolvimento de microserviços.
+- **JPA / Hibernate**: Camada de persistência com MySQL.
+- **MySQL**: Banco de dados relacional.
+- **BCryptPasswordEncoder**: Criptografia de senha.
+
+---
+
+## 🔗 Endpoints Disponíveis
 
 ### 1. `POST /doctors`
-Cria um novo médico.
+Cadastra um novo médico.
 
-**Request Body**:
+**Request Body:**
 ```json
 {
   "name": "Dr. João Silva",
@@ -35,9 +36,8 @@ Cria um novo médico.
 }
 ```
 
-**Response**:
-- **Status**: `201 Created`
-- **Body**:
+**Response:**
+- Status: `201 Created`
 ```json
 {
   "name": "Dr. João Silva",
@@ -48,30 +48,35 @@ Cria um novo médico.
 
 ---
 
-### 2. `GET /doctors?name={name}&password={password}`
-Busca um médico pelo nome e senha.
+### 2. `POST /doctors/login`
+Autentica um médico através do nome e senha.
 
-**Request Params**:
-- `name`: Nome do médico.
-- `password`: Senha do médico.
+**Request Body:**
+```json
+{
+  "name": "Dr. João Silva",
+  "password": "senha123"
+}
+```
 
-**Response**:
-- **Status**: `200 OK`
+**Response:**
+- Status: `200 OK`
 ```json
 {
   "name": "Dr. João Silva",
   "crm": "123456",
-  "expertise": "Cardiologia"
+  "expertise": "Cardiologia",
+  "role": "ROLE_DOCTOR"
 }
 ```
-- **Status**: `404 Not Found` (Caso o médico não seja encontrado)
+- Status: `401 Unauthorized` (Credenciais inválidas)
 
 ---
 
 ### 3. `POST /nurses`
-Cria uma nova enfermeira ou enfermeiro.
+Cadastra um(a) enfermeiro(a).
 
-**Request Body**:
+**Request Body:**
 ```json
 {
   "name": "Maria Clara",
@@ -81,9 +86,8 @@ Cria uma nova enfermeira ou enfermeiro.
 }
 ```
 
-**Response**:
-- **Status**: `201 Created`
-- **Body**:
+**Response:**
+- Status: `201 Created`
 ```json
 {
   "name": "Maria Clara",
@@ -94,17 +98,46 @@ Cria uma nova enfermeira ou enfermeiro.
 
 ---
 
-## Instalação
+### 4. `POST /nurses/login`
+Autentica um(a) enfermeiro(a) através do nome e senha.
 
-### 1. Clonando o Repositório
+**Request Body:**
+```json
+{
+  "name": "Maria Clara",
+  "password": "senhaSegura"
+}
+```
+
+**Response:**
+- Status: `200 OK`
+```json
+{
+  "name": "Maria Clara",
+  "registrationNumber": "COREN-548723",
+  "shift": "NIGHT",
+  "role": "ROLE_NURSE"
+}
+```
+- Status: `401 Unauthorized` (Credenciais inválidas)
+
+---
+
+## 🚫 Tratamento de Senhas
+Todas as senhas de médicos e enfermeiros(as) são armazenadas de forma criptografada com **BCrypt** para garantir segurança no armazenamento.
+
+---
+
+## 🌐 Instalação Local
+
+### 1. Clonando o repositório
 ```bash
 git clone https://github.com/seu-usuario/hospital-staff-api.git
 cd hospital-staff-api
 ```
 
 ### 2. Configuração do Banco de Dados
-A API utiliza **MySQL** como banco de dados. Certifique-se de que o MySQL está instalado e em execução. Crie um banco de dados chamado `hospital` e ajuste as configurações no arquivo `application.yml`:
-
+Edite o `application.yml` com suas credenciais MySQL:
 ```yaml
 spring:
   datasource:
@@ -113,25 +146,19 @@ spring:
     password: sua-senha
 ```
 
----
-
-### 3. Executando a API
-Depois de configurar o banco de dados, execute o seguinte comando para subir a aplicação:
-
+### 3. Executando a aplicação
 ```bash
 mvn spring-boot:run
 ```
 
-A API estará acessível em:  
-`http://localhost:8080`
+A aplicação estará disponível em: `http://localhost:8080`
 
 ---
 
-## Integrações Futuras
+## 🚡 Roadmap Futuro
 
-O sistema está preparado para futuras integrações, incluindo:
+- Integração de sistema de alteração de dados de profissionais.
+- Sistema de notificações internas para turnos, alterações e novos atendimentos.
+- Evolução para roles personalizados e hierarquia de acesso.
 
-- **Criptografia de senha**.
-- **Alteração de informações**: Alterar dados a respeito dos agentes que trabalham no hospital.
-- **Sistema de notificações internas**: Alerta de alterações em dados sensíveis, turnos e novos atendimentos.
-
+---
