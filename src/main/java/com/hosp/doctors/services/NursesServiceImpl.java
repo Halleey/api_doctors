@@ -6,6 +6,8 @@ import com.hosp.doctors.repositories.NursesRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class NursesServiceImpl implements NursesService {
 
@@ -25,5 +27,10 @@ public class NursesServiceImpl implements NursesService {
         nurses.setShift(requestDTO.getShift());
         nurses.setPassword(encripted);
         repository.save(nurses);
+    }
+
+    @Override
+    public Optional<Nurses> getDoctorInfo(String name) {
+        return repository.findByName(name);
     }
 }

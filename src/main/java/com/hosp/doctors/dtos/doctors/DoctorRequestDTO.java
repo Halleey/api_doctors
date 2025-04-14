@@ -1,4 +1,4 @@
-package com.hosp.doctors.dtos;
+package com.hosp.doctors.dtos.doctors;
 import java.io.Serializable;
 public class DoctorRequestDTO implements Serializable {
 

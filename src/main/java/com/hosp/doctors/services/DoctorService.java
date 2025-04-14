@@ -1,7 +1,7 @@
 package com.hosp.doctors.services;
 
-import com.hosp.doctors.dtos.DoctorRequestDTO;
-import com.hosp.doctors.dtos.DoctorResponseDTO;
+import com.hosp.doctors.dtos.doctors.DoctorRequestDTO;
+import com.hosp.doctors.dtos.doctors.DoctorResponseDTO;
 import com.hosp.doctors.entities.Doctors;
 
 import java.util.Optional;

@@ -1,9 +1,9 @@
 package com.hosp.doctors.controllers;
 
 import com.hosp.doctors.dtos.AuthRequestDTO;
-import com.hosp.doctors.dtos.DoctorLoginDTO;
-import com.hosp.doctors.dtos.DoctorRequestDTO;
-import com.hosp.doctors.dtos.DoctorResponseDTO;
+import com.hosp.doctors.dtos.doctors.DoctorLoginDTO;
+import com.hosp.doctors.dtos.doctors.DoctorRequestDTO;
+import com.hosp.doctors.dtos.doctors.DoctorResponseDTO;
 import com.hosp.doctors.entities.Doctors;
 import com.hosp.doctors.services.DoctorService;
 import org.springframework.http.HttpStatus;

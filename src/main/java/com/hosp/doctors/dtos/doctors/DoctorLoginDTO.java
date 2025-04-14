@@ -1,4 +1,4 @@
-package com.hosp.doctors.dtos;
+package com.hosp.doctors.dtos.doctors;
 
 import com.hosp.doctors.entities.Role;
 public class DoctorLoginDTO {

@@ -1,4 +1,4 @@
-package com.hosp.doctors.dtos;
+package com.hosp.doctors.dtos.doctors;
 public class DoctorResponseDTO {
     private String name;
     private String crm;
